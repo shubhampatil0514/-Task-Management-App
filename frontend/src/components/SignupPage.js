@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Signup() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [profilePicture, setProfilePicture] = useState(null);
@@ -31,6 +33,10 @@ function Signup() {
       console.error('Error:', error);
       setMessage(error.message);
     }
+  };
+
+  const handleLogin = () => {
+    navigate('/');
   };
 
   return (
@@ -75,13 +81,22 @@ function Signup() {
                 className="w-full py-2 px-4 border border-gray-300 rounded focus:outline-none"
               />
             </div>
-            <button
-              type="submit"
-              onClick={handleSignup}
-              className="bg-gray-900 text-white py-2 px-4 rounded font-bold cursor-pointer"
-            >
-              Sign Up
-            </button>
+            <div className='flex justify-between'>
+              <button
+                type="submit"
+                onClick={handleSignup}
+                className="bg-gray-900 text-white py-2 px-4 rounded font-bold cursor-pointer"
+              >
+                Sign Up
+              </button>
+              <button
+                type="submit"
+                onClick={handleLogin}
+                className="bg-gray-900 text-white py-2 px-4 rounded font-bold cursor-pointer"
+              >
+                Login
+              </button>
+            </div>
           </form>
           {message && <p className="text-green-500 mt-2">{message}</p>}
         </div>
